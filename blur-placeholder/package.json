@@ -26,6 +26,7 @@
 	"devDependencies": {
 		"@directus/extensions-sdk": "11.0.1",
 		"@types/node": "^20.11.25",
+		"blurhash": "^2.0.5",
 		"typescript": "^5.4.2"
 	}
 }
