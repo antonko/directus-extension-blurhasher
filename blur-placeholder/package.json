@@ -8,7 +8,6 @@
 		"directus-extension",
 		"directus-extension-hook"
 	],
-	"type": "module",
 	"files": [
 		"dist"
 	],
@@ -27,6 +26,7 @@
 		"@directus/extensions-sdk": "11.0.1",
 		"@types/node": "^20.11.25",
 		"blurhash": "^2.0.5",
+		"sharp": "^0.33.2",
 		"typescript": "^5.4.2"
 	}
 }

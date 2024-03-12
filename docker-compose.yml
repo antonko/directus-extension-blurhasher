@@ -8,6 +8,7 @@ services:
       - ./database:/directus/database
       - ./uploads:/directus/uploads
       - ./blur-placeholder:/directus/extensions/directus-extension-blur-placeholder
+      - ./blur-placeholder:/directus/node_modules/directus-extension-blur-placeholder
     environment:
       KEY: "replace-with-random-value"
       SECRET: "replace-with-random-value"

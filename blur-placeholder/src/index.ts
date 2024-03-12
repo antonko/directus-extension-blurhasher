@@ -1,4 +1,45 @@
 import { defineHook } from "@directus/extensions-sdk";
+import { encode } from "blurhash";
+import { Readable } from "stream";
+
+const sharp = require("sharp");
+
+// Функция для чтения потока и преобразования его в Buffer
+const streamToBuffer = async (stream: Readable): Promise<Buffer> => {
+  const chunks: Buffer[] = [];
+  for await (const chunk of stream) {
+    chunks.push(chunk as Buffer);
+  }
+  return Buffer.concat(chunks);
+};
+
+// Функция для получения данных изображения и генерации blurhash
+const generateBlurHashFromStream = async (
+  stream: Readable
+): Promise<string | null> => {
+  try {
+    // Преобразование потока в Buffer
+    const buffer = await streamToBuffer(stream);
+    // Использование sharp для преобразования Buffer в Uint8ClampedArray
+    const { data, info } = await sharp(buffer)
+      .ensureAlpha()
+      .raw()
+      .toBuffer({ resolveWithObject: true });
+
+    // Генерация blurhash
+    const blurHash = encode(
+      new Uint8ClampedArray(data),
+      info.width,
+      info.height,
+      4,
+      4
+    );
+    return blurHash;
+  } catch (error) {
+    console.error("Ошибка при генерации blurhash:", error);
+    return null;
+  }
+};
 
 const placeholderField = {
   collection: "directus_files",
@@ -26,7 +67,7 @@ const placeholderField = {
 
 export default defineHook(
   ({ action, init }, { services, database, getSchema, logger }) => {
-    const { AssetsService, FieldsService } = services;
+    const { AssetsService, ItemsService, FieldsService } = services;
     init("routes.custom.after", async () => {
       logger.info(`[blur-placeholder]: Initializing extension`);
       const schema = await getSchema();
@@ -47,9 +88,11 @@ export default defineHook(
     action("files.upload", async ({ payload, key }, context) => {
       const serviceOptions = { ...context, knex: context.database };
       const assetsService = new AssetsService(serviceOptions);
+      const itemService = new ItemsService("directus_files", {
+        knex: database,
+        schema: context.schema,
+      });
 
-	  console.log("payload", payload);
-	  console.log("key", key);
       const transform = getTransformation(payload.type, 80, 200);
       if (transform == undefined) {
         logger.info("[blur-placeholder]: The file is not a image - skipped");
@@ -61,8 +104,10 @@ export default defineHook(
           fit: "inside",
         },
       });
-	  console.log("stream", stream)
-	  console.log("key", key)
+      generateBlurHashFromStream(stream).then((blurHash) => {
+        console.log("BlurHash:", blurHash);
+        itemService.updateOne(key, { plur_placeholder: blurHash });
+      });
     });
   }
 );
