@@ -1,0 +1,48 @@
+{
+	"name": "directus-extension-blurhasher",
+	"description": "Please enter a description for your extension",
+	"icon": "extension",
+	"version": "0.1.0",
+	"author": "Anton Kovalev <antonko@gmail.com>",
+	"keywords": [
+		"directus",
+		"directus-extension",
+		"directus-extension-hook",
+		"blurhash",
+		"image",
+		"thumbnail",
+		"placeholder"
+	],
+	"files": [
+		"dist"
+	],
+	"directus:extension": {
+		"type": "hook",
+		"path": "dist/index.js",
+		"source": "src/index.ts",
+		"host": "^10.10.0"
+	},
+	"scripts": {
+		"build": "directus-extension build",
+		"dev": "directus-extension build -w --no-minify",
+		"link": "directus-extension link",
+		"lint": "eslint . --ext .ts"
+	},
+	"devDependencies": {
+		"@directus/extensions-sdk": "11.0.1",
+		"@types/node": "^20.11.25",
+		"@typescript-eslint/eslint-plugin": "^7.2.0",
+		"@typescript-eslint/parser": "^7.2.0",
+		"blurhash": "^2.0.5",
+		"eslint": "^8.57.0",
+		"eslint-config-prettier": "^9.1.0",
+		"eslint-plugin-prettier": "^5.1.3",
+		"prettier": "^3.2.5",
+		"sharp": "^0.33.2",
+		"typescript": "^5.4.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/antonko/directus-extension-blurhasher"
+	}
+}

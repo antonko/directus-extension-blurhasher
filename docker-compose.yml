@@ -7,8 +7,8 @@ services:
     volumes:
       - ./database:/directus/database
       - ./uploads:/directus/uploads
-      - ./blur-placeholder:/directus/extensions/directus-extension-blur-placeholder
-      - ./blur-placeholder:/directus/node_modules/directus-extension-blur-placeholder
+      - ./blurhasher:/directus/extensions/directus-extension-blurhasher
+      - ./blurhasher:/directus/node_modules/directus-extension-blurhasher
     environment:
       KEY: "replace-with-random-value"
       SECRET: "replace-with-random-value"
