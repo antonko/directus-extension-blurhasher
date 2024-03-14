@@ -73,8 +73,8 @@ jobs:
           name: built-files
           path: ./blurhasher
 
-      - name: Copy README.md to blurhasher
-        run: cp README.md blurhasher/README.md
+      # - name: Copy README.md to blurhasher
+      #   run: cp README.md blurhasher/README.md
 
       # - name: Create package tarball
       #   run: npm pack
