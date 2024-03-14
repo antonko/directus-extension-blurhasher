@@ -45,7 +45,7 @@ jobs:
         working-directory: ./blurhasher
 
       - name: Archive built files
-        run: tar -czvf build.tar.gz -C ./blurhasher dist package.json package-lock.json
+        run: tar -czvf build.tar.gz -C ./blurhasher dist package.json
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -73,12 +73,11 @@ jobs:
           name: built-files
           path: ./blurhasher
 
-      # - name: Copy README.md to blurhasher
-      #   run: cp README.md blurhasher/README.md
-
-      # - name: Create package tarball
-      #   run: npm pack
-      #   working-directory: ./blurhasher
+      - name: Copy README.md to blurhasher
+        run: cp README.md blurhasher/README.md
+      
+      - name: Unpack build artifact
+        run: tar -xzvf build.tar.gz
 
       - name: Semantic Release
         run: npx semantic-release
