@@ -12,6 +12,18 @@
 npm install directus-extension-blurhasher
 ```
 
+Пример Dockerfile с установленным расширением:
+
+```Dockerfile
+FROM directus/directus:10.10.4
+
+USER root
+RUN corepack enable
+USER node
+
+RUN pnpm install directus-extension-blurhasher
+```
+
 ## Разработка
 
 Для начала разработки вам необходимо запустить локальную копию Directus с помощью docker-compose.
