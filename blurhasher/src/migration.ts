@@ -29,10 +29,7 @@ export async function runMigration(fieldsService: any, logger: any) {
     .catch(() => false);
   if (!found) {
     logger.warn(`[blurhasher]: Running migrations...`);
-    await fieldsService.createField(
-      blurhashField.collection,
-      blurhashField,
-    );
+    await fieldsService.createField(blurhashField.collection, blurhashField);
     logger.warn(`[blurhasher]: Migration done`);
   }
 }
