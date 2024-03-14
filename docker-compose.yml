@@ -13,6 +13,6 @@ services:
       KEY: "replace-with-random-value"
       SECRET: "replace-with-random-value"
       ADMIN_EMAIL: "admin@example.com"
-      ADMIN_PASSWORD: "d1r3ctu5"
+      ADMIN_PASSWORD: "admin"
       DB_CLIENT: "sqlite3"
       DB_FILENAME: "/directus/database/data.db"
