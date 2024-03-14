@@ -1,6 +1,6 @@
 {
   "name": "directus-extension-blurhasher",
-  "description": "A Directus extension for generating and storing BlurHash strings, enhancing image loading visuals.",
+  "description": "Generate and store BlurHash strings for images upon upload in Directus, enhancing visual loading experiences.",
   "icon": "extension",
   "version": "0.1.0",
   "author": "Anton Kovalev <antonko@gmail.com>",
