@@ -1,6 +1,6 @@
 {
   "name": "directus-extension-blurhasher",
-  "description": "Please enter a description for your extension",
+  "description": "A Directus extension for generating and storing BlurHash strings, enhancing image loading visuals.",
   "icon": "extension",
   "version": "0.1.0",
   "author": "Anton Kovalev <antonko@gmail.com>",
@@ -23,12 +23,11 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/npm",
       [
         "@semantic-release/github",
         {
           "assets": [
-            "./dist/**"
+            {"path": "build.tar.gz", "label": "Built Files"}
           ],
           "releasedLabels": "released"
         }

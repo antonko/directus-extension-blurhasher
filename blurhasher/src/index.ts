@@ -15,7 +15,7 @@ export default defineHook(
     action("files.upload", async ({ payload, key }, context) => {
       if (
         !["image/jpeg", "image/png", "image/webp", "image/tiff"].includes(
-          payload.type
+          payload.type,
         )
       ) {
         logger.info("[blurhasher]: The file is not a image - skipped");
@@ -40,5 +40,5 @@ export default defineHook(
         itemService.updateOne(key, { blurhash: blurHash });
       });
     });
-  }
+  },
 );

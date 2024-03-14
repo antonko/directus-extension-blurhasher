@@ -2,28 +2,19 @@ name: Release CI/CD
 
 on:
   push:
-    branches: [semver-ci-cd]
-  pull_request:
-    branches: [semver-ci-cd]
+    branches: [main]
 
 jobs:
-  permissions:
-    contents: write
-
-  build-and-release:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
-          registry-url: "https://registry.npmjs.org/"
-
-      - name: Change to project directory
-        run: cd blurhasher
 
       - name: Install dependencies
         run: npm install
@@ -33,9 +24,54 @@ jobs:
         run: npm run lint
         working-directory: ./blurhasher
 
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blurhasher
+
       - name: Build
         run: npm run build
         working-directory: ./blurhasher
+
+      - name: Archive built files
+        run: tar -czvf build.tar.gz -C ./blurhasher dist package.json package-lock.json
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-files
+          path: build.tar.gz
+
+  semantic-release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: built-files
+          path: ./blurhasher
 
       - name: Semantic Release
         run: npx semantic-release

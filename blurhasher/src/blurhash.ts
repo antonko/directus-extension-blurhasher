@@ -12,7 +12,7 @@ export const streamToBuffer = async (stream: Readable): Promise<Buffer> => {
 };
 
 export const generateBlurHashFromStream = async (
-  stream: Readable
+  stream: Readable,
 ): Promise<string | null> => {
   try {
     const buffer = await streamToBuffer(stream);
@@ -26,7 +26,7 @@ export const generateBlurHashFromStream = async (
       info.width,
       info.height,
       4,
-      4
+      4,
     );
     return blurHash;
   } catch (error) {
