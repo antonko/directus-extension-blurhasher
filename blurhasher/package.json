@@ -19,7 +19,7 @@
   ],
   "release": {
     "branches": [
-      "npm-deploy-config"
+      "main"
     ],
     "plugins": [
       "@semantic-release/commit-analyzer",
