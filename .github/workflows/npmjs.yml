@@ -78,6 +78,7 @@ jobs:
       
       - name: Unpack build artifact
         run: tar -xzvf build.tar.gz
+        working-directory: ./blurhasher
 
       - name: Semantic Release
         run: npx semantic-release
