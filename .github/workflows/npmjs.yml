@@ -1,0 +1,81 @@
+name: Release CI/CD
+
+on:
+  push:
+    branches: [npm-deploy-config]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blurhasher
+
+      - name: Run linter
+        run: npm run lint
+        working-directory: ./blurhasher
+
+  build:
+    needs: lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blurhasher
+
+      - name: Build
+        run: npm run build
+        working-directory: ./blurhasher
+
+      - name: Archive built files
+        run: tar -czvf build.tar.gz -C ./blurhasher dist package.json package-lock.json
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: built-files
+          path: build.tar.gz
+
+  semantic-release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: built-files
+          path: ./blurhasher
+
+      - name: Semantic Release
+        run: npx semantic-release
+        working-directory: ./blurhasher
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
