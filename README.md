@@ -8,7 +8,9 @@
 
 ## Установка
 
-На данный момент доступна только ручная установка.
+```bash
+npm install directus-extension-blurhasher
+```
 
 ## Разработка
 
