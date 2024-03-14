@@ -1,0 +1,30 @@
+name: Code Check on Push
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./blurhasher
+
+      - name: Run linter
+        run: npm run lint
+        working-directory: ./blurhasher
+
+      - name: Build
+        run: npm run build
+        working-directory: ./blurhasher
