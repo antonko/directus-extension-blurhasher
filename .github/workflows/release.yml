@@ -7,6 +7,9 @@ on:
     branches: [semver-ci-cd]
 
 jobs:
+  permissions:
+    contents: write
+
   build-and-release:
     runs-on: ubuntu-latest
 
