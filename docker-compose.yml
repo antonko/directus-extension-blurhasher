@@ -1,7 +1,7 @@
 version: "3"
 services:
   directus:
-    image: directus/directus:10
+    image: directus/directus:10.0.0
     ports:
       - 8055:8055
     volumes:

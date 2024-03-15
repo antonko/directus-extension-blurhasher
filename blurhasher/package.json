@@ -34,7 +34,10 @@
         "@semantic-release/github",
         {
           "assets": [
-            {"path": "build.tar.gz", "label": "Built Files"}
+            {
+              "path": "build.tar.gz",
+              "label": "Built Files"
+            }
           ],
           "releasedLabels": "released"
         }
@@ -45,7 +48,7 @@
     "type": "hook",
     "path": "dist/index.js",
     "source": "src/index.ts",
-    "host": "^10.10.0"
+    "host": "^10.0.0"
   },
   "scripts": {
     "build": "directus-extension build",
@@ -55,6 +58,7 @@
   },
   "devDependencies": {
     "@directus/extensions-sdk": "11.0.1",
+    "@directus/types": "^11.0.7",
     "@types/node": "^20.11.25",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
@@ -62,6 +66,7 @@
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",
+    "pino": "^8.19.0",
     "prettier": "^3.2.5",
     "semantic-release": "^23.0.2",
     "sharp": "^0.33.2",
