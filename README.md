@@ -1,39 +1,39 @@
 # Directus Blurhasher
 
-Это расширение для [Directus](https://github.com/directus/directus), которое автоматически генерирует [blurhash](https://github.com/woltapp/blurhash/) строки для изображений при их загрузке.
+This is an extension for [Directus](https://github.com/directus/directus) that automatically generates [blurhash](https://github.com/woltapp/blurhash/) strings for images upon their upload.
 
-Основные возможности:
-- Генерация и сохранение blurhash строк для изображений при их загрузке.
-- Возможность установки уровня детализации для генерации blurhash строк (Low, Medium, High).
-- Генерация blurhash строк для уже существующих изображений.
-- Автоматическая миграция при установке расширения.
+Key features:
+- Generation and storage of blurhash strings for images upon their upload.
+- The ability to set the detail level for generating blurhash strings (Low, Medium, High).
+- Generation of blurhash strings for existing images.
+- Automatic migration upon extension installation.
 
-В системную коллекцию с иллюстрациями (`directus_files`), в дополнение к основным полям, добавляется поле `blurhash`, в котором будет храниться сгенерированная blurhash строка.
+In the system collection of illustrations (`directus_files`), in addition to the main fields, a `blurhash` field is added, which will store the generated blurhash string.
 
-## Настройки
-В разделе настроек Directus доступны следующие параметры:
-- **Gegenerate on restart** - при следующем запуске Directus будут сгенерированы blurhash строки для всех существующих изображений (выключится после генерации).
-- **Detail level** - уровень детализации для генерации blurhash строк (Low, Medium, High)
+## Settings
+The following settings are available in the Directus settings section:
+- **Generate on restart** - upon the next launch of Directus, blurhash strings will be generated for all existing images (this will be disabled after generation).
+- **Detail level** - the level of detail for generating blurhash strings (Low, Medium, High)
 
-Скорость генерации blurhash напрямую зависит от уровня детализации.
+The speed of blurhash generation directly depends on the level of detail.
 
-Уровень детализации влияет на количество используемых компонентов при генерации blurhash строки. Чем выше уровень детализации, тем больше компонентов будет использовано, и тем более детализированной будет blurhash строка.
+The level of detail affects the number of components used in generating the blurhash string. The higher the level of detail, the more components will be used, and the more detailed the blurhash string will be.
 
-- Low: 3x3 компонента
-- Medium: 6x6 компонента
-- High: 8x8 компонента
+- Low: 3x3 components
+- Medium: 6x6 components
+- High: 8x8 components
 
-## Требования
+## Requirements
 
-Это расширение было протестировано на версии v10.0.0 Directus, однако оно должно работать и на более ранних версиях.
+This extension has been tested on Directus version v10.0.0, however, it should work on earlier versions as well.
 
-## Установка
+## Installation
 
 ```bash
 npm install directus-extension-blurhasher
 ```
 
-Пример Dockerfile с установленным расширением:
+Example Dockerfile with the extension installed:
 
 ```Dockerfile
 FROM directus/directus:10.10.4
@@ -45,20 +45,19 @@ USER node
 RUN pnpm install directus-extension-blurhasher
 ```
 
-## Разработка
-
-Запустить процесс сборки в режиме разработки и docker образ Directus для тестирования.
+## Development
+Start the build process in development mode and a Docker image of Directus for testing.
 
 ```bash
 cd blurhasher
 npm install
 npm run dev
 ```
-Запуск самого Directus:
+To launch Directus itself:
+    
 ```bash
 docker-compose up
 ```
 
-* Логин: `admin@example.com`
-* Пароль: `admin`
-
+- Login: admin@example.com
+- Password: admin
