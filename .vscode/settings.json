@@ -1,6 +1,5 @@
 {
-  "editor.formatOnSave": true,
-  "prettier.trailingComma": "es5",
+  "editor.formatOnSave": false,
   "files.eol": "\n",
   "eslint.validate": ["javascript", "typescript"],
   "editor.codeActionsOnSave": {
