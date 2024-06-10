@@ -56,7 +56,7 @@ npm run dev
 To launch Directus itself:
     
 ```bash
-docker-compose up
+docker compose up
 ```
 
 - Login: admin@example.com

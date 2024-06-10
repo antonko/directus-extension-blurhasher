@@ -4,7 +4,6 @@ export const directus_files_blurhash: FieldRaw = {
   field: "blurhash",
   type: "string",
   meta: {
-    id: 4,
     collection: "directus_files",
     field: "blurhash",
     special: null,
@@ -48,7 +47,6 @@ export const settings_detail_level: FieldRaw = {
   field: "blurhasher_detail_level",
   type: "string",
   meta: {
-    id: 1,
     collection: "directus_settings",
     field: "blurhasher_detail_level",
     special: null,
@@ -98,7 +96,6 @@ export const settings_regenerate: FieldRaw = {
   field: "blurhasher_regenerate_on_restart",
   type: "boolean",
   meta: {
-    id: 3,
     collection: "directus_settings",
     field: "blurhasher_regenerate_on_restart",
     special: ["cast-boolean"],
