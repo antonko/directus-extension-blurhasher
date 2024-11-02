@@ -10,6 +10,8 @@ Key features:
 
 In the system collection of illustrations (`directus_files`), in addition to the main fields, a `blurhash` field is added, which will store the generated blurhash string.
 
+![screen](./docs/screenshot.png)
+
 ## Settings
 The following settings are available in the Directus settings section:
 - **Generate on restart** - upon the next launch of Directus, blurhash strings will be generated for all existing images (this will be disabled after generation).
